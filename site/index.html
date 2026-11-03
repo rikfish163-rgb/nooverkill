@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="给 Agent 一份有分寸的工作约定。保留真实问题，约束过度修法，把任务推进到交付。支持六种平台与公开正反案例。">
+  <meta name="description" content="给 Agent 一份有分寸的工作约定。保留真实问题，约束过度修法，把任务推进到交付。支持六种平台，欢迎反馈提示词使用后的问题与正向效果。">
   <meta property="og:title" content="Agent Scope — 让 Agent 把工作做完">
-  <meta property="og:description" content="Portable rules. Proportionate work. Open cases.">
+  <meta property="og:description" content="Portable rules. Proportionate work. Practical feedback.">
   <title>Agent Scope · 有分寸地推进，完整地交付</title>
   <link rel="icon" href="mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
@@ -22,7 +22,7 @@
     <a class="nav-link" href="#principles"><span>02</span> 工作原则</a>
     <a class="nav-link" href="#install"><span>03</span> 安装与兼容</a>
     <a class="nav-link" href="#rules"><span>04</span> 提示词正文</a>
-    <a class="nav-link" href="#cases"><span>05</span> 正反案例</a>
+    <a class="nav-link" href="#cases"><span>05</span> 规则示例</a>
     <a class="nav-link" href="#contribute"><span>06</span> 一起完善</a>
   </nav>
   <div class="sidebar-note"><span class="small-dot"></span> OPEN SOURCE · MIT<p>少一点无谓的防御，<br>多一点完成的工作。</p><a href="https://github.com/rikfish163-rgb/agent-scope">GitHub repository <span aria-hidden="true">↗</span></a></div>
@@ -52,15 +52,15 @@
       <div class="rule-panel"><div class="rule-toolbar"><div class="segmented" role="group" aria-label="规则版本"><button type="button" data-profile="full" aria-pressed="true">完整约定</button><button type="button" data-profile="core" aria-pressed="false">核心原则</button></div><div class="rule-actions"><span id="rule-size"></span><button type="button" id="copy-rules" class="text-button">复制正文</button><a id="download-rules" href="RULES.md" download>下载 .md ↧</a></div></div><pre id="rule-text" tabindex="0" aria-label="规则正文">@@RULES@@</pre><div class="rule-foot"><span>一份正文，多种适配。案例库不会随安装器写入上下文。</span><a href="https://github.com/rikfish163-rgb/agent-scope/blob/main/RULES.md">在 GitHub 阅读 ↗</a></div></div>
     </section>
     <section id="cases" class="section-anchor content-section">
-      <div class="section-heading"><div><p class="eyebrow">04 / CALIBRATE WITH CASES</p><h2>看清边界的两侧。</h2></div><p>反例说明哪里做过了。<br>正例保留那些真正必要的工作。</p></div>
+      <div class="section-heading"><div><p class="eyebrow">04 / CALIBRATE WITH CASES</p><h2>看清边界的两侧。</h2></div><p>反例说明提示词希望减少的行为。<br>必要的工作，同样要保留。</p></div>
       <div class="case-controls"><div class="segmented" role="group" aria-label="案例类型"><button type="button" data-filter="all" aria-pressed="true">全部 <span>8</span></button><button type="button" data-filter="bad" aria-pressed="false">Bad cases <span>6</span></button><button type="button" data-filter="positive" aria-pressed="false">Positive cases <span>2</span></button></div><label class="case-search"><span aria-hidden="true">⌕</span><input type="search" id="case-search" placeholder="搜索案例或关键词" aria-label="搜索案例"></label></div>
-      <p class="case-note">当前八条是规则中的校准示例，不是模型效果测量。社区提交经证据审阅后收录。</p><div id="case-grid" class="case-grid" aria-live="polite"></div><p id="case-empty" class="empty-state" hidden>没有匹配的案例。试试其他关键词。</p>
-      <a class="cases-issues" href="https://github.com/rikfish163-rgb/agent-scope/issues">查看社区原始提交 <span aria-hidden="true">↗</span></a>
+      <p class="case-note">README 已列出典型 bad cases。这里的八条是规则示例；欢迎另行反馈使用本仓库提示词后的问题与效果。</p><div id="case-grid" class="case-grid" aria-live="polite"></div><p id="case-empty" class="empty-state" hidden>没有匹配的案例。试试其他关键词。</p>
+      <a class="cases-issues" href="https://github.com/rikfish163-rgb/agent-scope/issues">查看提示词使用反馈 <span aria-hidden="true">↗</span></a>
     </section>
-    <section id="contribute" class="section-anchor contribute"><div><p class="eyebrow">05 / AN OPEN NOTEBOOK</p><h2>把你的案例，<br>变成下一次的判断。</h2><p>欢迎具体的失败，也欢迎有依据的成功。<br>带上任务、行为、必要证据和适用边界。</p><a class="text-link" href="https://github.com/rikfish163-rgb/agent-scope/blob/main/CONTRIBUTING.md">阅读贡献指南 →</a></div><div class="contribute-links"><a href="https://github.com/rikfish163-rgb/agent-scope/issues/new?template=bad-case.yml"><span class="case-tag bad">BAD CASE</span><h3>哪里做过了？</h3><p>无收益检查、过度包装、审阅循环或停滞。</p><span class="submit-arrow" aria-hidden="true">↗</span></a><a href="https://github.com/rikfish163-rgb/agent-scope/issues/new?template=positive-case.yml"><span class="case-tag positive">POSITIVE CASE</span><h3>什么判断值得保留？</h3><p>合理推进，以及必要的校验、兼容和安全工作。</p><span class="submit-arrow" aria-hidden="true">↗</span></a></div></section>
+    <section id="contribute" class="section-anchor contribute"><div><p class="eyebrow">05 / AN OPEN NOTEBOOK</p><h2>用了之后，<br>发生了什么？</h2><p>欢迎反馈使用本仓库提示词后出现的问题，<br>以及解决了哪些问题、带来了什么好效果。</p><a class="text-link" href="https://github.com/rikfish163-rgb/agent-scope/blob/main/CONTRIBUTING.md">阅读贡献指南 →</a></div><div class="contribute-links"><a href="https://github.com/rikfish163-rgb/agent-scope/issues/new?template=bad-case.yml"><span class="case-tag bad">USAGE ISSUE</span><h3>使用后还有什么问题？</h3><p>仍然过度防御，或出现漏检、过度纠偏等新问题。</p><span class="submit-arrow" aria-hidden="true">↗</span></a><a href="https://github.com/rikfish163-rgb/agent-scope/issues/new?template=positive-case.yml"><span class="case-tag positive">POSITIVE EFFECT</span><h3>解决了什么，效果如何？</h3><p>原先的问题、使用后的动作，以及实际取得的结果。</p><span class="submit-arrow" aria-hidden="true">↗</span></a></div></section>
     <section class="limitations"><h2>已知限制</h2><p>提示词提供行为约定，不保证每次遵循。平台的加载范围、长度限制、上下文压缩和更具体的项目规则会影响效果。安装器文件行为有自动化测试；不代表已经完成各模型的效果评测。详情见 <a href="https://github.com/rikfish163-rgb/agent-scope/blob/main/hosts.md#已知限制">兼容说明</a>。</p></section>
   </main>
-  <footer><div class="footer-brand">Agent Scope<span>Do the work. Keep it proportionate.</span></div><p>Scope principles adapted from <a href="https://github.com/wanshuiyin/HERO-Anti-OverDefense">HERO — Anti-OverDefense</a>.<br>MIT · <a href="https://github.com/rikfish163-rgb">rikfish163-rgb</a> · <a href="https://github.com/rikfish163-rgb/agent-scope/blob/main/THIRD_PARTY_NOTICES.md">Attribution</a></p></footer>
+  <footer><div class="footer-brand">Agent Scope<span>Do the work. Keep it proportionate.</span></div><p>规则 · 判断 · 使用反馈<br>MIT · <a href="https://github.com/rikfish163-rgb">rikfish163-rgb</a> · <a href="https://github.com/rikfish163-rgb/agent-scope/blob/main/THIRD_PARTY_NOTICES.md">许可声明</a></p></footer>
 </div>
 <div id="toast" role="status" class="toast" hidden></div>
 <script id="scope-data" type="application/json">@@DATA@@</script>

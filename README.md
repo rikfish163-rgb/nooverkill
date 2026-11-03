@@ -1,16 +1,62 @@
-# Agent Scope
+# 🧭 Agent Scope
 
 ![Agent Scope — Do the work. Keep it proportionate.](site/banner.svg)
 
 **让 Agent 把工作做完。真实问题一个不漏，修法保持分寸。**
 
-[网站](https://rikfish163-rgb.github.io/agent-scope/) · [完整提示词](RULES.md) · [安装与兼容](hosts.md) · [案例库](cases/README.md) · [English](README_EN.md)
+[🌐 网站](https://rikfish163-rgb.github.io/agent-scope/) · [📜 完整提示词](RULES.md) · [🔌 安装与兼容](hosts.md) · [💬 使用反馈](https://github.com/rikfish163-rgb/agent-scope/issues) · [🇬🇧 English](README_EN.md)
 
-Agent Scope 是一份跨平台的 Agent 工作约定，以及用来校准判断的公开案例库。它把范围控制、工程习惯、有效验证与交付写作放在一起：对真实问题负责，让复杂度有实际用途，并持续推进任务。
+Agent Scope 是一份跨平台的 Agent 工作约定。它把范围控制、工程习惯、有效验证与交付写作放在一起：对真实问题负责，让复杂度有实际用途，并持续推进任务。
 
-范围原则改编自 [HERO — Anti-OverDefense](https://github.com/wanshuiyin/HERO-Anti-OverDefense)，保留“约束修法，不限制发现”的边界与 MIT 许可说明。工程专题包括生成代码、实时 UI、组件故事、主题语义、接口兼容和持久化执行，均按项目条件适用。
+👇 直接复制提示词即可开始。README 中的 bad cases 说明这份约定想减少哪些行为；欢迎分享**使用本仓库提示词后仍然出现或新出现的问题，以及解决了什么问题、带来了什么好效果**。
 
-## 开始使用
+## 🚀 快速上手：复制这段提示词
+
+把下面整段放进当前 Agent 的规则文件，并保留已有项目约定。Codex / OpenCode 使用 `AGENTS.md`，Claude Code 使用 `CLAUDE.md`，Gemini CLI 使用 `GEMINI.md`；其他入口见 [平台说明](hosts.md)。也可以先粘贴到当前对话试用。
+
+```text
+遵守更高优先级指令和用户的明确要求；具体项目约定优先于通用默认规则。
+下面约束的是你提议和实施的修法，不限制发现和报告真实问题。
+
+凡是这里真的有问题，都要报告，包括少见但由项目文档示例、公开接口或真实数据产生的情况。
+受支持用法可达即可，不要求先复现；仅仅“理论上构造得出”不算。
+
+1. 默认操作者是自己机器上的合作者；项目写明了对手或威胁模型，就按那个范围处理。
+   可以校验，禁止过度防御，不把普通任务扩展成安全攻防研究。
+2. 不加哈希、校验和或指纹，除非它替代了实质上更贵的操作，而且结果会改变下一步动作。
+3. 不为这里不会发生的情况加 feature flag、迁移框架、兼容层、包装层或层层守卫。
+4. 冷门编码、符号链接竞态、RTL 文本和毫秒级竞态不在修法范围内，
+   除非本项目受支持的用法可达。罕见不能成为忽略真实问题的理由。
+5. 该判断就判断，不用评分表、检查清单或反复校验已经定论的事来替代判断。
+6. 用户、项目或更高优先级规则明确要求的安全、迁移、兼容、生成、校验和审阅仍须完成。
+   它们是任务本身，不算过度防御。
+7. 成品直接呈现成立的结果，围绕最强的结果组织。限制集中放在 Limitations 或已知问题。
+   不占优的数字，是取舍就说明取舍，否则平实陈述；数字照样保留，不写成认输。
+8. 推进本身是交付的一部分。多个方案合理时，选一个并说明取舍，继续做。
+   只有分歧实质不同、选错难回头或明确要求批准时才提问。
+   非阻塞细节记下来继续推进，等待回答时先做独立工作。
+   对范围内推测性或极低概率竞态、安全边界增加复杂度前，说明具体失败、概率和成本，取得同意；
+   不借此重新打开范围外的假设问题或阻塞已授权工作。
+9. 代码、注释、docstring、commit、PR 和总结只呈现正确的最终结果，贴合项目风格。
+   不写指令、过程、中间报错、试错纠偏、放弃方案、“为什么没做 X”或 AI 辅助署名。
+   “别提 X”意味着成品里没有 X，不是声明“不讨论 X”。避免模型腔过渡语。
+   必要的最终约束、真实限制和项目要求的生成元数据仍须保留。
+
+跑任何检查前，简短说明：它能检出什么具体失败？失败后我会做什么不同的事？
+答不上来就不跑可选检查；明确要求的检查仍须说明用途并执行。
+只有相关变更、新失败、未解决疑点或明确要求，才重复已经完成的检查。
+
+用于校准的反例：直接比单元格就能回答却逐行算哈希；无人读取的校验和；
+给没有用户和部署的原型加账号堡垒；审了一夜却没写功能；对任何提交都判不通过；守卫只由上一层守卫证明必要。
+这些是例子，不是驳回真实问题的清单。
+应当保留：能省掉已有大文件重读的摘要；项目文档示例就会产生的少见输入所暴露的真实错误。
+
+对的就说对，不为交差硬找问题。
+```
+
+这段是中文快速上手版。完整工作约定还包含代码组织、UI、接口兼容和持久化执行等工程专题，见 [RULES.md](RULES.md)；英文核心版见 [rules/core.md](rules/core.md)。
+
+## 🔌 命令安装
 
 在目标项目目录运行（Git + Python 3.9+，无需额外依赖）：
 
@@ -21,7 +67,7 @@ python3 "$HOME/.local/share/agent-scope/install.py" --agent codex --project .
 
 将 `codex` 换成 `claude`、`cursor`、`copilot`、`gemini` 或 `opencode`。安装器保留已有项目内容，重复运行更新同一个区块。`--profile core` 安装核心九条短版，`--remove` 只卸载本工具区块。
 
-Windows PowerShell：
+🪟 Windows PowerShell：
 
 ```powershell
 git clone https://github.com/rikfish163-rgb/agent-scope.git "$env:LOCALAPPDATA\agent-scope"
@@ -30,7 +76,7 @@ py -3 "$env:LOCALAPPDATA\agent-scope\install.py" --agent codex --project .
 
 [全局安装、自定义入口、Gemini 原生扩展与更新方式 →](hosts.md)
 
-## 规则里有什么
+## 🧠 规则里有什么
 
 - **发现与修法分开。** 文档、公开接口和真实数据可达的问题，即使少见也要报告；不要求先做出复现。
 - **复杂度需要理由。** 摘要须替代明显更贵的操作并改变下一步；不为不存在的场景搭建包装、迁移和兼容结构。
@@ -43,19 +89,49 @@ py -3 "$env:LOCALAPPDATA\agent-scope\install.py" --agent codex --project .
 | [RULES.md](RULES.md) | 完整版，保留通用工程专题与适用条件 |
 | [rules/core.md](rules/core.md) | 九条核心原则与正反校准例子 |
 | [install.py](install.py) / [platforms.json](platforms.json) | 六种原生文件入口与自定义 Markdown 入口 |
-| [cases/catalog.json](cases/catalog.json) | 网站案例的唯一数据源 |
-| [.github/ISSUE_TEMPLATE](.github/ISSUE_TEMPLATE) | Bad case / Positive case 提交表单 |
+| [cases/catalog.json](cases/catalog.json) | 网站规则示例与收录反馈的数据源 |
+| [.github/ISSUE_TEMPLATE](.github/ISSUE_TEMPLATE) | 提示词使用问题 / 正向效果提交表单 |
 | [site](site) / [docs](docs) | 静态页面源码 / GitHub Pages 产物 |
 
-## 两种案例都欢迎
+## 🚫 Bad cases：我们想减少什么
 
-[提交 Bad case](https://github.com/rikfish163-rgb/agent-scope/issues/new?template=bad-case.yml)：无收益校验、假设性边界、过度搭建、机械审阅或停滞。
+这些是提示词针对的典型行为示例，用来识别问题。
 
-[提交 Positive case](https://github.com/rikfish163-rgb/agent-scope/issues/new?template=positive-case.yml)：有依据的推进、确有用途的摘要、必要的安全与兼容工作、文档示例暴露的真实错误。
+| 场景 | ❌ 不合适的行为 | ✅ 合适的处理 |
+| --- | --- | --- |
+| 比较两张表 | 每行都算哈希、维护摘要索引，才去判断差异 | 直接比较单元格，输出差异 |
+| 交付一个文件 | 附带一批没有任何流程读取的校验和 | 交付所需文件；摘要须省去更贵操作并改变下一步 |
+| 探索本地原型 | 应用没有用户、没有部署，却先做账号安全堡垒 | 完成原型目标，并执行项目明确要求的安全工作 |
+| 实现一个功能 | 对同一补丁审一整夜，功能仍没落地 | 完成能捕获具体失败的检查，然后继续交付 |
+| 审阅代码 | 无论代码和证据如何，对所有提交都判不通过 | 有问题就指出；正确时明确说正确 |
+| 修复已有行为 | 守卫套守卫，理由只是上一层也可能失效 | 在拥有边界的地方验证一次，向内传递已保证的值 |
+| 选择实现方案 | 几个方案都合理，仍反复让用户选择或批准 | 自主选一个，说明取舍，继续推进 |
+| 撰写交付物 | 每段附免责声明，把指令、改稿和中间错误写进成品 | 呈现最终结果，必要限制集中说明 |
 
-案例要说清任务、行为、证据和合适的下一步。当前八条种子记录是规则示例，标为 `illustrative`；经证据审阅的实测记录标为 `observed`。不虚构节省比例，也不把所有新增检查判成坏例子。[贡献指南 →](CONTRIBUTING.md)
+**🟢 两种看起来相似、却应当保留的工作：**
 
-## 本地开发
+- 摘要比较确实省掉大文件重读，并决定是否重读。
+- 项目文档示例会产生的少见输入暴露了真实错误。
+
+判断依据是这里实际需要什么，不是“它听起来像防御”。
+
+## 💬 欢迎反馈使用后的问题与效果
+
+**🐛 使用后仍有问题，或出现了新问题？**
+
+欢迎报告：仍然过度设计、重复审阅、不必要停顿；或提示词导致过度纠偏、漏掉必要校验、忽略真实问题、与项目要求冲突等。请说明你使用了本仓库的哪版提示词、放在哪里，以及具体发生了什么。
+
+👉 [反馈使用问题 / Bad case](https://github.com/rikfish163-rgb/agent-scope/issues/new?template=bad-case.yml)
+
+**🌱 解决了哪些问题，有什么好的效果？**
+
+欢迎分享：原来卡在哪，使用提示词后怎样推进，哪些无效工作减少了，哪些必要工作得到保留，以及最终完成了什么。有前后片段或结果就附上；未测量的时间、成本和成功率不必填写推测数字。
+
+👉 [分享解决的问题与正向效果 / Positive case](https://github.com/rikfish163-rgb/agent-scope/issues/new?template=positive-case.yml)
+
+提交时带上 Agent / 模型 / 版本、提示词版本与加载方式、任务上下文和必要证据。具体要求见 [贡献指南](CONTRIBUTING.md)。规则示例与用户的实际使用反馈分别标注，实际反馈在 [Issues](https://github.com/rikfish163-rgb/agent-scope/issues) 公开讨论。
+
+## 🛠️ 本地开发
 
 ```bash
 python3 -m unittest discover -s tests
@@ -66,10 +142,10 @@ python3 -m http.server 8000 --directory docs
 
 浏览 `http://localhost:8000`。页面无需前端构建依赖；正文、案例和平台信息由 Python 标准库构建脚本写入静态页面。GitHub Pages 从 `main` 分支的 `docs/` 发布。
 
-## 已知限制
+## ⚠️ 已知限制
 
-提示词是工作约定，不保证每次执行。平台加载范围、长度限制、上下文压缩和更具体的规则会影响效果。文件适配有自动化测试；不声称已经验证所有客户端或证明模型效果。完整说明见 [兼容文档](hosts.md#已知限制)。
+提示词是工作约定，不保证每次执行。平台加载范围、长度限制、上下文压缩和更具体的规则会影响效果。规则示例不代表实测效果；单次使用反馈不等于普遍效果或因果证明。文件适配有自动化测试，完整说明见 [兼容文档](hosts.md#已知限制)。
 
-## 许可与来源
+## 📄 许可
 
-[MIT](LICENSE)。范围规则与校准例子改编自 HERO；版权和来源见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。本项目独立维护，与各 Agent 产品厂商无隶属关系。
+[MIT](LICENSE) · [第三方声明](THIRD_PARTY_NOTICES.md)

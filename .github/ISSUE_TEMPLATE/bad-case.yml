@@ -1,10 +1,10 @@
-name: Bad case · 过度防御与停滞
-description: 提交不成比例的检查、边界扩展、包装或审阅循环。
+name: 🐛 使用问题 · Bad case
+description: 反馈使用 Agent Scope 提示词后仍然存在或新出现的问题。
 title: "[Bad case] "
 body:
   - type: markdown
     attributes:
-      value: "请提供具体需求、行为和证据。罕见但受支持的输入、明确要求的安全工作都不自动算 bad case。"
+      value: "请描述使用本仓库提示词后的具体问题，并说明提示词版本与加载方式。可以是仍然过度防御，也可以是漏掉必要检查、过度纠偏或与项目约定冲突。"
   - type: input
     id: environment
     attributes:
@@ -23,6 +23,9 @@ body:
         - 过度搭建 / 包装 / 兼容层
         - 停滞 / 不必要提问
         - 交付文案 / 过程痕迹
+        - 过度纠偏 / 漏掉必要校验或真实问题
+        - 提示词与项目约定冲突
+        - 提示词安装 / 加载问题
         - 其他具体问题
     validations:
       required: true
@@ -36,22 +39,24 @@ body:
   - type: textarea
     id: behavior
     attributes:
-      label: 实际行为与证据
+      label: 使用提示词后的实际行为与证据
       description: 粘贴必要片段、代码、文档引用或公开链接。不要提交完整私有日志。
     validations:
       required: true
   - type: textarea
     id: consequence
     attributes:
-      label: 为什么不成比例，以及合适的下一步
-      description: 说明额外工作带来的实际影响，以及更直接的处理方式。
+      label: 对任务的影响，以及你期望的行为
+      description: 说明仍未解决或新出现的问题。若有使用前后的对照，也欢迎提供。
     validations:
       required: true
   - type: textarea
     id: rules
     attributes:
-      label: 当时加载的规则与使用方式
-      description: full / core、安装目标，以及是否有更具体的规则冲突。不清楚也可说明。
+      label: 使用的本仓库提示词与加载方式
+      description: README 快速上手版 / full / core / 自定义；版本、提交号或使用日期；规则文件路径或直接粘贴。说明是否确认加载，不清楚可如实填写。
+    validations:
+      required: true
   - type: checkboxes
     id: disclosure
     attributes:

@@ -1,10 +1,10 @@
-name: Positive case · 合理判断与必要工作
-description: 提交有效推进、合理验证，或看似罕见但实际必要的处理。
+name: 🌱 正向效果 · Positive case
+description: 分享使用 Agent Scope 提示词后解决的问题与实际好效果。
 title: "[Positive case] "
 body:
   - type: markdown
     attributes:
-      value: "好的案例也包括必要的安全、兼容和验证。说明判断为何成立；不要求证明提示词是唯一原因。"
+      value: "欢迎分享使用本仓库提示词后解决了什么问题、带来了什么好效果。说明具体任务、提示词用法和实际结果，可附使用前后的片段。"
   - type: input
     id: environment
     attributes:
@@ -14,27 +14,35 @@ body:
   - type: textarea
     id: task
     attributes:
-      label: 原始任务与相关约束
+      label: 原始任务与原先遇到的问题
     validations:
       required: true
   - type: textarea
+    id: before
+    attributes:
+      label: 使用前的行为或结果（可选）
+      description: 如果有前后对照，请附必要片段或公开链接。
+  - type: textarea
     id: behavior
     attributes:
-      label: Agent 的判断、动作与证据
-      description: 给出必要片段、代码或公开链接；说明哪些输入由项目真实支持。
+      label: 使用提示词后的动作与证据
+      description: 说明 Agent 怎样处理任务，以及哪些行为发生了变化。可附片段、代码或公开链接。
     validations:
       required: true
   - type: textarea
     id: result
     attributes:
-      label: 结果与可复用的原则
-      description: 陈述实际观察。若没有量化测量，不必填写推测的节省比例。
+      label: 解决了什么问题，取得了什么实际效果
+      description: 例如完成了原先卡住的任务、减少无效检查、保留必要验证或改善交付质量。未测量的时间、成本和成功率不必填写推测数字。
     validations:
       required: true
   - type: textarea
     id: rules
     attributes:
-      label: 当时加载的规则与使用方式
+      label: 使用的本仓库提示词与加载方式
+      description: README 快速上手版 / full / core / 自定义；版本、提交号或使用日期；规则文件路径或直接粘贴。说明是否确认加载。
+    validations:
+      required: true
   - type: checkboxes
     id: disclosure
     attributes:

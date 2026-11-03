@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 安装与平台兼容说明
+    url: https://github.com/rikfish163-rgb/agent-scope/blob/main/hosts.md
+    about: 查看文件位置、更新和卸载方式；兼容问题也可提交普通 Issue。

@@ -1,0 +1,44 @@
+name: Positive case · 合理判断与必要工作
+description: 提交有效推进、合理验证，或看似罕见但实际必要的处理。
+title: "[Positive case] "
+body:
+  - type: markdown
+    attributes:
+      value: "好的案例也包括必要的安全、兼容和验证。说明判断为何成立；不要求证明提示词是唯一原因。"
+  - type: input
+    id: environment
+    attributes:
+      label: Agent / 模型 / 版本 / 平台
+    validations:
+      required: true
+  - type: textarea
+    id: task
+    attributes:
+      label: 原始任务与相关约束
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Agent 的判断、动作与证据
+      description: 给出必要片段、代码或公开链接；说明哪些输入由项目真实支持。
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: 结果与可复用的原则
+      description: 陈述实际观察。若没有量化测量，不必填写推测的节省比例。
+    validations:
+      required: true
+  - type: textarea
+    id: rules
+    attributes:
+      label: 当时加载的规则与使用方式
+  - type: checkboxes
+    id: disclosure
+    attributes:
+      label: 公开提交
+      options:
+        - label: 我已去除密钥和不应公开的个人或项目内容。
+          required: true

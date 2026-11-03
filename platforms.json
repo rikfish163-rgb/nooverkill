@@ -1,0 +1,33 @@
+{
+  "codex": {
+    "name": "Codex", "project": "AGENTS.md", "global": ".codex/AGENTS.md",
+    "source": "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
+    "note": "AGENTS.override.md takes precedence in the same directory. Start a new session after installation."
+  },
+  "claude": {
+    "name": "Claude Code", "project": "CLAUDE.md", "global": ".claude/CLAUDE.md",
+    "source": "https://code.claude.com/docs/en/memory",
+    "note": "Use /memory to inspect loaded instructions. Project settings can exclude instruction sources."
+  },
+  "cursor": {
+    "name": "Cursor", "project": ".cursor/rules/agent-scope.mdc",
+    "preamble": "---\ndescription: Proportionate work, concrete judgment, and complete delivery.\nalwaysApply: true\n---\n",
+    "source": "https://cursor.com/docs/rules",
+    "note": "The adapter includes alwaysApply: true. A plain .md file in .cursor/rules is not a project rule."
+  },
+  "copilot": {
+    "name": "GitHub Copilot", "project": ".github/copilot-instructions.md",
+    "source": "https://docs.github.com/en/copilot/concepts/prompting-and-context/custom-instructions",
+    "note": "Instruction support differs between chat, code review, CLI, and IDE clients. Check the linked support matrix."
+  },
+  "gemini": {
+    "name": "Gemini CLI", "project": "GEMINI.md", "global": ".gemini/GEMINI.md",
+    "source": "https://geminicli.com/docs/cli/gemini-md/",
+    "note": "Use /memory show to inspect context and /memory reload to refresh it. Custom context.fileName settings can change discovery."
+  },
+  "opencode": {
+    "name": "OpenCode", "project": "AGENTS.md", "global": ".config/opencode/AGENTS.md",
+    "source": "https://opencode.ai/docs/rules/",
+    "note": "Codex and OpenCode share the project AGENTS.md. Installing both updates the same managed block."
+  }
+}

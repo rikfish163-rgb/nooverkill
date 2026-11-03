@@ -1,0 +1,61 @@
+name: Bad case · 过度防御与停滞
+description: 提交不成比例的检查、边界扩展、包装或审阅循环。
+title: "[Bad case] "
+body:
+  - type: markdown
+    attributes:
+      value: "请提供具体需求、行为和证据。罕见但受支持的输入、明确要求的安全工作都不自动算 bad case。"
+  - type: input
+    id: environment
+    attributes:
+      label: Agent / 模型 / 版本 / 平台
+      placeholder: "例如：Codex，模型名称，客户端版本，Linux"
+    validations:
+      required: true
+  - type: dropdown
+    id: family
+    attributes:
+      label: 问题类型
+      options:
+        - 无收益哈希 / 校验和
+        - 项目不产生的边界情况
+        - 重复审阅 / 机械评分
+        - 过度搭建 / 包装 / 兼容层
+        - 停滞 / 不必要提问
+        - 交付文案 / 过程痕迹
+        - 其他具体问题
+    validations:
+      required: true
+  - type: textarea
+    id: task
+    attributes:
+      label: 原始任务与项目约束
+      description: 说明用户实际要求、受支持用法，以及相关安全或兼容约定。
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: 实际行为与证据
+      description: 粘贴必要片段、代码、文档引用或公开链接。不要提交完整私有日志。
+    validations:
+      required: true
+  - type: textarea
+    id: consequence
+    attributes:
+      label: 为什么不成比例，以及合适的下一步
+      description: 说明额外工作带来的实际影响，以及更直接的处理方式。
+    validations:
+      required: true
+  - type: textarea
+    id: rules
+    attributes:
+      label: 当时加载的规则与使用方式
+      description: full / core、安装目标，以及是否有更具体的规则冲突。不清楚也可说明。
+  - type: checkboxes
+    id: disclosure
+    attributes:
+      label: 公开提交
+      options:
+        - label: 我已去除密钥和不应公开的个人或项目内容。
+          required: true

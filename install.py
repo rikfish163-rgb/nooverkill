@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install, update, or remove Agent Scope rules or a standalone skill."""
+"""Install, update, or remove NoOverkill rules or a standalone skill."""
 
 import argparse
 import json
@@ -25,7 +25,7 @@ def span(text):
     if not starts and not ends:
         return None
     if starts != 1 or ends != 1 or text.index(BEGIN) > text.index(END):
-        raise ValueError("The Agent Scope markers are incomplete or duplicated. Repair that block before updating it.")
+        raise ValueError("The NoOverkill markers are incomplete or duplicated. Repair that block before updating it.")
     start, end = text.index(BEGIN), text.index(END) + len(END)
     if text[end:end + 2] == "\r\n":
         end += 2
@@ -61,7 +61,7 @@ def install_skill(target, remove=False, dry_run=False):
     if target.exists() and (not target.is_dir() or any(target.iterdir())):
         entry = target / "SKILL.md"
         if not entry.is_file() or "  source: https://github.com/rikfish163-rgb/agent-scope\n" not in read_text(entry).replace("\r\n", "\n"):
-            raise ValueError("This directory is not an Agent Scope skill. Choose another --target or merge it manually.")
+            raise ValueError("This directory is not a NoOverkill skill. Choose another --target or merge it manually.")
     if dry_run:
         print(f"Would {'remove' if remove else 'install'} skill: {target}")
         return
@@ -86,7 +86,7 @@ def install_skill(target, remove=False, dry_run=False):
             target.rmdir()
     print(f"{'Removed' if remove and changed else 'Installed' if changed else 'Unchanged'} skill: {target}")
     if not remove:
-        print("Start a new session and select Agent Scope, or ask the agent to use the agent-scope skill.")
+        print("Start a new session and select NoOverkill, or ask the agent to use the agent-scope skill.")
 
 
 def update(text, body, preamble="", remove=False):
@@ -117,7 +117,7 @@ def main(argv=None):
     parser.add_argument("--profile", choices=["full", "core"], default=None, help="Rules only: full (default) or core")
     action = parser.add_mutually_exclusive_group()
     action.add_argument("--dry-run", action="store_true", help="Show the destination without writing")
-    action.add_argument("--remove", action="store_true", help="Remove the Agent Scope block or bundled skill files")
+    action.add_argument("--remove", action="store_true", help="Remove the NoOverkill block or bundled skill files")
     args = parser.parse_args(argv)
     try:
         target = destination(args)
@@ -149,7 +149,7 @@ def main(argv=None):
                 handle.write(result)
         print(f"{'Removed' if args.remove else 'Installed ' + args.profile}: {target}")
         if not args.remove:
-            print("Only the Agent Scope block was added or replaced. Reload the agent's instructions or start a new session.")
+            print("Only the NoOverkill block was added or replaced. Reload the agent's instructions or start a new session.")
         return 0
     except (OSError, UnicodeError, ValueError) as error:
         print(f"Error: {error}", file=sys.stderr)

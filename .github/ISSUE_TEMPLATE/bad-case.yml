@@ -1,5 +1,5 @@
 name: 🐛 使用问题 · Bad case
-description: 反馈使用 Agent Scope 提示词后仍然存在或新出现的问题。
+description: 反馈使用 NoOverkill 提示词后仍然存在或新出现的问题。
 title: "[Bad case] "
 body:
   - type: markdown

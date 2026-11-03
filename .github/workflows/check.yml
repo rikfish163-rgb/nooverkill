@@ -17,4 +17,5 @@ jobs:
       - run: python -m unittest discover -s tests
       - run: python scripts/build_site.py
       - run: node --check site/app.js
+      - run: node --check site/copy.js
       - run: git diff --exit-code -- docs skills plugins

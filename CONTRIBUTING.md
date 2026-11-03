@@ -1,14 +1,14 @@
 # 🤝 贡献使用反馈与平台适配
 
-README 中的 bad cases 是提示词针对的典型行为示例。社区提交重点是：**使用 Agent Scope 提示词后，仍然存在或新出现了什么问题，以及解决了什么问题、带来了什么好的效果。**
+README 中的 bad cases 是提示词针对的典型行为示例。社区提交重点是：**使用 NoOverkill 提示词后，仍然存在或新出现了什么问题，以及解决了什么问题、带来了什么好的效果。**
 
 ## 🐛 使用问题
 
-使用 [问题反馈表单](https://github.com/rikfish163-rgb/agent-scope/issues/new?template=bad-case.yml)。欢迎反馈仍然过度设计、重复检查、停滞，也欢迎反馈提示词引起的过度纠偏、漏掉必要校验、忽略真实问题或与项目约定冲突。描述使用后的具体行为、对任务的影响和期望行为。
+使用 [问题反馈表单](https://github.com/rikfish163-rgb/nooverkill/issues/new?template=bad-case.yml)。欢迎反馈仍然过度设计、重复检查、停滞，也欢迎反馈提示词引起的过度纠偏、漏掉必要校验、忽略真实问题或与项目约定冲突。描述使用后的具体行为、对任务的影响和期望行为。
 
 ## 🌱 解决的问题与正向效果
 
-使用 [正向效果表单](https://github.com/rikfish163-rgb/agent-scope/issues/new?template=positive-case.yml)。说明原先遇到的问题、使用后的动作和实际结果。例如完成了卡住的任务、减少无效工作、改善交付，或保留了必要的安全、兼容与校验。若有前后对照片段，可一并提供。
+使用 [正向效果表单](https://github.com/rikfish163-rgb/nooverkill/issues/new?template=positive-case.yml)。说明原先遇到的问题、使用后的动作和实际结果。例如完成了卡住的任务、减少无效工作、改善交付，或保留了必要的安全、兼容与校验。若有前后对照片段，可一并提供。
 
 ## 📝 反馈需要的上下文
 

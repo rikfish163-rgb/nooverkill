@@ -1,20 +1,28 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "agent-scope",
-  "version": "0.2.0",
-  "description": "Proportionate remedies, purposeful verification, and complete delivery.",
-  "author": {"name": "rikfish163-rgb"},
-  "homepage": "https://rikfish163-rgb.github.io/agent-scope/",
-  "repository": "https://github.com/rikfish163-rgb/agent-scope",
+  "version": "0.3.0",
+  "description": "NoOverkill: AI coding rules to reduce overengineering and finish tasks.",
+  "author": {
+    "name": "rikfish163-rgb"
+  },
+  "homepage": "https://rikfish163-rgb.github.io/nooverkill/",
+  "repository": "https://github.com/rikfish163-rgb/nooverkill",
   "license": "MIT",
-  "keywords": ["agent-skills", "scope", "engineering"],
+  "keywords": [
+    "agent-skills",
+    "scope",
+    "engineering"
+  ],
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "Agent Scope",
+        "displayName": "NoOverkill",
         "shortDescription": "Keep remedies proportionate and finish the task",
         "longDescription": "Apply shared scope and engineering principles to report real problems, avoid speculative scaffolding, run purposeful checks, and deliver the authorized work.",
-        "defaultPrompt": ["Use Agent Scope to continue this task with proportionate remedies and complete delivery."]
+        "defaultPrompt": [
+          "Use NoOverkill to continue this task with proportionate remedies and complete delivery."
+        ]
       }
     }
   }

@@ -4,6 +4,7 @@ from pathlib import Path
 import re
 import tempfile
 import unittest
+from xml.etree import ElementTree
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,14 +23,39 @@ class SiteTests(unittest.TestCase):
             self.assertEqual(data["rules"]["full"], (ROOT / "RULES.md").read_text(encoding="utf-8"))
             self.assertEqual((target / "RULES.md").read_text(encoding="utf-8"), data["rules"]["full"])
             self.assertEqual((target / "CORE.md").read_text(encoding="utf-8"), data["rules"]["core"])
-            self.assertNotIn("@@", page)
-            ids = set(re.findall(r'\bid="([^"]+)"', page))
-            for anchor in re.findall(r'href="#([^"]+)"', page):
-                self.assertIn(anchor, ids)
-            for asset in re.findall(r'(?:href|src)="([^"]+)"', page):
-                if asset.startswith(("http", "#")):
-                    continue
-                self.assertTrue((target / asset).is_file(), asset)
+            for relative in ("index.html", "en/index.html"):
+                document = target / relative
+                content = document.read_text(encoding="utf-8")
+                self.assertNotIn("@@", content)
+                ids = set(re.findall(r'\bid="([^"]+)"', content))
+                for anchor in re.findall(r'href="#([^"]+)"', content):
+                    self.assertIn(anchor, ids)
+                for asset in re.findall(r'(?:href|src)="([^"]+)"', content):
+                    if asset.startswith(("http", "#")):
+                        continue
+                    local = document.parent / asset
+                    if local.is_dir():
+                        local = local / "index.html"
+                    self.assertTrue(local.is_file(), (relative, asset))
+
+    def test_search_metadata_points_to_both_published_language_pages(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = builder.build(directory)
+            urls = []
+            for relative, language in (("index.html", "zh-CN"), ("en/index.html", "en")):
+                content = (target / relative).read_text(encoding="utf-8")
+                self.assertIn(f'<html lang="{language}">', content)
+                canonical = re.search(r'rel="canonical" href="([^"]+)"', content).group(1)
+                urls.append(canonical)
+                self.assertIn(f'<meta property="og:url" content="{canonical}">', content)
+                self.assertIn(f'hreflang="en" href="{builder.SITE}en/"', content)
+                self.assertIn(f'hreflang="zh-CN" href="{builder.SITE}"', content)
+                self.assertIn(f'content="{builder.SITE}social-preview.png"', content)
+            sitemap = ElementTree.parse(target / "sitemap.xml")
+            locations = [element.text for element in sitemap.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
+            self.assertEqual(locations, urls)
+            self.assertEqual(len(set(urls)), 2)
+            self.assertTrue((target / "social-preview.png").is_file())
 
     def test_cases_have_distinct_ids_and_explicit_evidence(self):
         cases = json.loads((ROOT / "cases/catalog.json").read_text(encoding="utf-8"))

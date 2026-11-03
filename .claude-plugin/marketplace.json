@@ -1,8 +1,16 @@
 {
   "name": "agent-scope",
-  "owner": {"name": "rikfish163-rgb"},
-  "metadata": {"description": "Agent Scope working principles", "version": "0.2.0"},
+  "owner": {
+    "name": "rikfish163-rgb"
+  },
+  "metadata": {
+    "description": "NoOverkill working principles",
+    "version": "0.3.0"
+  },
   "plugins": [
-    {"name": "agent-scope", "source": "./plugins/agent-scope"}
+    {
+      "name": "agent-scope",
+      "source": "./plugins/agent-scope"
+    }
   ]
 }

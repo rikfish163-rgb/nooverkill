@@ -1,10 +1,12 @@
-# 🧭 Agent Scope
+# 🧭 NoOverkill — AI Coding Rules Against Overengineering
 
-![Agent Scope — Do the work. Keep it proportionate.](site/banner.svg)
+![NoOverkill — Less overengineering. More working code.](site/banner.svg)
 
-**Do the work. Keep it proportionate.**
+**Less overengineering. More working code.**
 
-[🌐 Website](https://rikfish163-rgb.github.io/agent-scope/) · [📜 Full rules](RULES.md) · [⚡ Core rules](rules/core.md) · [🇨🇳 中文](README.md)
+Rules, skills & plugins for **Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI and OpenCode**.
+
+[🌐 Website](https://rikfish163-rgb.github.io/nooverkill/en/) · [📜 Full rules](RULES.md) · [⚡ Core rules](rules/core.md) · [🇨🇳 中文](README.md)
 
 Portable working instructions for coding agents, combining scope control, engineering conventions, purposeful verification, and final-result writing. Community feedback focuses on problems and positive outcomes observed after using this repository’s prompts.
 
@@ -15,7 +17,7 @@ Report every genuine issue, including uncommon inputs reachable through supporte
 Paste this block into your agent’s instruction file while preserving existing project instructions, or try it in the current conversation. Use `AGENTS.md` for Codex/OpenCode, `CLAUDE.md` for Claude Code, or `GEMINI.md` for Gemini CLI. See [platform instructions](hosts.md) for other hosts.
 
 ```text
-# Agent Scope · Core
+# NoOverkill · Core
 
 Follow higher-priority instructions and explicit user requests. Specific project requirements override these general defaults. These rules limit remedies, never the discovery or reporting of genuine problems.
 
@@ -42,7 +44,7 @@ This is the core version. [RULES.md](RULES.md) also contains the engineering top
 | 🧩 Skill | Core principles on invocation; full engineering reference on demand | Six skill adapters |
 | 📦 Plugin | Host-managed distribution of the same skill | Codex and Claude Code |
 
-Usually choose one entry point. Installing a plugin makes its skill available; it does not append the full rules to every conversation.
+Usually choose one entry point. The display name is **NoOverkill**; the Skill and Plugin installation ID is `agent-scope`. Installing a plugin makes its skill available; it does not append the full rules to every conversation.
 
 ### 📦 Native plugins
 
@@ -51,18 +53,18 @@ Run in your **system terminal**, from any directory. Requires Git and a host ver
 **Codex:**
 
 ```bash
-codex plugin marketplace add rikfish163-rgb/agent-scope
+codex plugin marketplace add rikfish163-rgb/nooverkill
 codex plugin add agent-scope@agent-scope
 ```
 
 **Claude Code:**
 
 ```bash
-claude plugin marketplace add rikfish163-rgb/agent-scope
+claude plugin marketplace add rikfish163-rgb/nooverkill
 claude plugin install agent-scope@agent-scope --scope user
 ```
 
-The first command registers this repository as a marketplace; the second installs its plugin. In `agent-scope@agent-scope`, the left name is the plugin and the right name is the marketplace. Start a new session, then select **Agent Scope** in Codex or type `/agent-scope:agent-scope` followed by your task in Claude Code chat.
+The first command registers this repository as a marketplace; the second installs its plugin. In `agent-scope@agent-scope`, the left name is the plugin and the right name is the marketplace. Start a new session, then select **NoOverkill** in Codex or type `/agent-scope:agent-scope` followed by your task in Claude Code chat.
 
 ### 📜 Rule files / 🧩 Standalone skill
 
@@ -70,7 +72,7 @@ Requires Git and Python 3.9+, with no Python dependencies. Download the tool onc
 
 ```bash
 # macOS / Linux · Bash / Zsh
-git clone https://github.com/rikfish163-rgb/agent-scope.git "$HOME/.local/share/agent-scope"
+git clone https://github.com/rikfish163-rgb/nooverkill.git "$HOME/.local/share/agent-scope"
 ```
 
 Replace `/absolute/path/to/project` with your **target project**, not the downloaded tool repository. Choose one:
@@ -93,7 +95,7 @@ Replace `codex` with `claude`, `cursor`, `copilot`, `gemini`, or `opencode`. Rul
 Download once and replace `C:\path\to\project` with your target project:
 
 ```powershell
-git clone https://github.com/rikfish163-rgb/agent-scope.git "$env:LOCALAPPDATA\agent-scope"
+git clone https://github.com/rikfish163-rgb/nooverkill.git "$env:LOCALAPPDATA\agent-scope"
 py -3 "$env:LOCALAPPDATA\agent-scope\install.py" --agent codex --kind rules --project "C:\path\to\project"
 ```
 
@@ -107,9 +109,9 @@ Use `--project .` only when already in the target project. Use `--global` instea
 
 ## 💬 Share what happened after using the prompt
 
-🐛 [Report a usage problem / Bad case](https://github.com/rikfish163-rgb/agent-scope/issues/new?template=bad-case.yml): problems that persist or appear after applying Agent Scope, including continued overengineering, missed necessary checks, suppressed real findings, over-correction, or conflicts with project requirements.
+🐛 [Report a usage problem / Bad case](https://github.com/rikfish163-rgb/nooverkill/issues/new?template=bad-case.yml): problems that persist or appear after applying NoOverkill, including continued overengineering, missed necessary checks, suppressed real findings, over-correction, or conflicts with project requirements.
 
-🌱 [Share a solved problem or positive outcome](https://github.com/rikfish163-rgb/agent-scope/issues/new?template=positive-case.yml): what was blocked before, what the agent did after using the prompt, and what improved or was delivered. Before/after excerpts are welcome; no invented measurements are needed.
+🌱 [Share a solved problem or positive outcome](https://github.com/rikfish163-rgb/nooverkill/issues/new?template=positive-case.yml): what was blocked before, what the agent did after using the prompt, and what improved or was delivered. Before/after excerpts are welcome; no invented measurements are needed.
 
 Include the agent/model/version, prompt edition and version, loading method, task context, and relevant evidence. Illustrative examples remain separate from actual usage reports. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -126,6 +128,10 @@ python3 -m http.server 8000 --directory docs
 ```
 
 The site is buildless HTML/CSS/JS with a standard-library Python content build. GitHub Pages serves `main:/docs`.
+
+## ⭐ Support the project
+
+If NoOverkill helped you finish a task or cut unnecessary work, [star the repository](https://github.com/rikfish163-rgb/nooverkill) and share an excerpt. Real usage problems and positive outcomes help others judge where these instructions are useful.
 
 ## ⚠️ Limitations
 

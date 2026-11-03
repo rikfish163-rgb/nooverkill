@@ -2,7 +2,7 @@
 
 const data = JSON.parse(document.getElementById('scope-data').textContent);
 const byId = (id) => document.getElementById(id);
-const repository = 'https://github.com/rikfish163-rgb/agent-scope.git';
+const repository = 'https://github.com/rikfish163-rgb/nooverkill.git';
 let platform = 'codex';
 let ruleProfile = 'full';
 let caseFilter = 'all';
@@ -49,11 +49,11 @@ function renderInstall() {
   if (isPlugin) {
     byId('platform-source').href = platform === 'codex' ? 'https://developers.openai.com/plugins/build/plugins' : 'https://code.claude.com/docs/en/plugin-marketplaces';
     byId('install-command').textContent = platform === 'codex'
-      ? 'codex plugin marketplace add rikfish163-rgb/agent-scope\ncodex plugin add agent-scope@agent-scope'
-      : 'claude plugin marketplace add rikfish163-rgb/agent-scope\nclaude plugin install agent-scope@agent-scope --scope user';
+      ? 'codex plugin marketplace add rikfish163-rgb/nooverkill\ncodex plugin add agent-scope@agent-scope'
+      : 'claude plugin marketplace add rikfish163-rgb/nooverkill\nclaude plugin install agent-scope@agent-scope --scope user';
     byId('terminal-label').textContent = 'TERMINAL · 任意目录 · 个人插件';
-    byId('platform-note').textContent = `第一条注册本仓库 marketplace，第二条安装插件。新建会话后，${platform === 'codex' ? '在插件或技能选择器中选择 Agent Scope。' : '在对话框输入 /agent-scope:agent-scope 并附上任务。'}`;
-    byId('install-requirements').textContent = '需要 Git 与支持插件命令的宿主。Plugin 内含 Agent Scope Skill。';
+    byId('platform-note').textContent = `第一条注册本仓库 marketplace，第二条安装插件。新建会话后，${platform === 'codex' ? '在插件或技能选择器中选择 NoOverkill。' : '在对话框输入 /agent-scope:agent-scope 并附上任务。'}`;
+    byId('install-requirements').textContent = '需要 Git 与支持插件命令的宿主。Plugin 内含 NoOverkill Skill。';
   } else {
     const project = windows ? '"C:\\path\\to\\project"' : '"/absolute/path/to/project"';
     const args = `--agent ${platform} --kind ${kind} ${isGlobal ? '--global' : `--project ${project}`}${kind === 'rules' && profile === 'core' ? ' --profile core' : ''}`;
@@ -63,7 +63,7 @@ function renderInstall() {
       : `# 下载工具一次；已下载请更新仓库\ngit clone ${repository} "$HOME/.local/share/agent-scope"\n${instruction}\npython3 "$HOME/.local/share/agent-scope/install.py" ${args}`;
     byId('terminal-label').textContent = 'TERMINAL · 任意目录';
     byId('platform-source').href = isSkill ? host.skill_source : host.source;
-    const invocation = platform === 'codex' ? '输入 $agent-scope 并附上任务。' : platform === 'claude' ? '输入 /agent-scope 并附上任务。' : '在技能选择器中选择 Agent Scope，或明确让 Agent 使用 agent-scope 技能。';
+    const invocation = platform === 'codex' ? '输入 $agent-scope 并附上任务。' : platform === 'claude' ? '输入 /agent-scope 并附上任务。' : '在技能选择器中选择 NoOverkill，或明确让 Agent 使用 agent-scope 技能。';
     byId('platform-note').textContent = isSkill ? `安装完整技能目录，含核心原则及按需读取的工程参考。新建会话后${invocation}` : host.note;
     byId('install-requirements').textContent = '需要 Git 与 Python 3.9+。工具下载目录与目标项目是两个目录。';
   }

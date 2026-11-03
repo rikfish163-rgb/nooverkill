@@ -1,4 +1,4 @@
 interface:
-  display_name: "Agent Scope"
+  display_name: "NoOverkill"
   short_description: "Keep remedies proportionate and finish the task"
   default_prompt: "Use $agent-scope to continue this task with proportionate remedies, purposeful checks, and complete delivery."

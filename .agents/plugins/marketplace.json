@@ -1,6 +1,6 @@
 {
   "name": "agent-scope",
-  "interface": {"displayName": "Agent Scope"},
+  "interface": {"displayName": "NoOverkill"},
   "plugins": [
     {
       "name": "agent-scope",

@@ -1,12 +1,12 @@
 ---
 name: agent-scope
-description: Apply Agent Scope when the user requests its working principles, asks to reduce overengineering or unnecessary defensive work, or needs to resume a task stalled by speculative safeguards, repeated reviews, or avoidable approval requests. Continue the actual task with proportionate remedies and purposeful verification.
+description: Apply NoOverkill when the user requests its working principles, asks to reduce overengineering or unnecessary defensive work, or needs to resume a task stalled by speculative safeguards, repeated reviews, or avoidable approval requests. Continue the actual task with proportionate remedies and purposeful verification.
 license: MIT
 metadata:
   source: https://github.com/rikfish163-rgb/agent-scope
 ---
 
-# Agent Scope
+# NoOverkill
 
 Apply these principles to the current task and continue through delivery. Use the user's language and the project's style. Identify the authorized goal and any explicit project requirements, then choose a proportionate next action. Resolve nonblocking details while moving forward.
 

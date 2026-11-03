@@ -1,5 +1,7 @@
 # 🔌 安装与平台兼容
 
+产品显示名称为 **NoOverkill**。Skill、Plugin、marketplace 和受管理文件的标识统一为 `agent-scope`，安装及调用命令使用这个标识。
+
 ## 选择入口
 
 | 形式 | 适合什么时候 | 实际加载内容 |
@@ -19,11 +21,11 @@
 在系统终端运行，可位于任意目录。需要支持 `codex plugin` 的 Codex CLI，以及 Git：
 
 ```bash
-codex plugin marketplace add rikfish163-rgb/agent-scope
+codex plugin marketplace add rikfish163-rgb/nooverkill
 codex plugin add agent-scope@agent-scope
 ```
 
-第一条注册这个 GitHub 仓库作为 marketplace；第二条安装其中的 `agent-scope` 插件。`@` 左边是插件名，右边是 marketplace 名，二者在这里相同。安装后新建会话，在插件或技能选择器中选择 **Agent Scope**，并说明要处理的任务。
+第一条注册这个 GitHub 仓库作为 marketplace；第二条安装其中的 `agent-scope` 插件。`@` 左边是插件名，右边是 marketplace 名，二者在这里相同。安装后新建会话，在插件或技能选择器中选择 **NoOverkill**，并说明要处理的任务。
 
 更新 marketplace 和插件缓存后，新建会话：
 
@@ -45,7 +47,7 @@ codex plugin marketplace remove agent-scope
 在系统终端运行，可位于任意目录。需要支持 Plugin 的 Claude Code 和 Git：
 
 ```bash
-claude plugin marketplace add rikfish163-rgb/agent-scope
+claude plugin marketplace add rikfish163-rgb/nooverkill
 claude plugin install agent-scope@agent-scope --scope user
 ```
 
@@ -80,13 +82,13 @@ claude plugin marketplace remove agent-scope
 macOS / Linux（Bash / Zsh）：
 
 ```bash
-git clone https://github.com/rikfish163-rgb/agent-scope.git "$HOME/.local/share/agent-scope"
+git clone https://github.com/rikfish163-rgb/nooverkill.git "$HOME/.local/share/agent-scope"
 ```
 
 Windows PowerShell：
 
 ```powershell
-git clone https://github.com/rikfish163-rgb/agent-scope.git "$env:LOCALAPPDATA\agent-scope"
+git clone https://github.com/rikfish163-rgb/nooverkill.git "$env:LOCALAPPDATA\agent-scope"
 ```
 
 已下载过就使用后面的更新命令，不必再次 clone。下面的 `/absolute/path/to/project` 或 `C:\path\to\project` 都要换成你实际要工作的项目路径；不是这个工具仓库的路径。
@@ -197,7 +199,7 @@ py -3 "$env:LOCALAPPDATA\agent-scope\install.py" --agent codex --kind skill --pr
 若使用 Gemini 的扩展管理器，可直接加载完整规则：
 
 ```bash
-gemini extensions install https://github.com/rikfish163-rgb/agent-scope
+gemini extensions install https://github.com/rikfish163-rgb/nooverkill
 ```
 
 这个入口加载的是 `RULES.md` 上下文，与按需调用的 Skill 不同。[Gemini 扩展管理](https://geminicli.com/docs/extensions/)。

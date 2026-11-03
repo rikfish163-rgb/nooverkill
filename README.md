@@ -1,12 +1,14 @@
-# 🧭 Agent Scope
+# 🧭 NoOverkill — AI 编码反过度设计规则
 
-![Agent Scope — Do the work. Keep it proportionate.](site/banner.svg)
+![NoOverkill — Less overengineering. More working code.](site/banner.svg)
 
-**让 Agent 把工作做完。真实问题一个不漏，修法保持分寸。**
+**让 AI 少折腾，把代码做完。**
 
-[🌐 网站](https://rikfish163-rgb.github.io/agent-scope/) · [📜 完整提示词](RULES.md) · [🔌 安装与兼容](hosts.md) · [💬 使用反馈](https://github.com/rikfish163-rgb/agent-scope/issues) · [🇬🇧 English](README_EN.md)
+AI coding rules, skills & plugins for Claude Code, Codex, Cursor, Copilot, Gemini CLI and OpenCode.
 
-Agent Scope 是一份跨平台的 Agent 工作约定。它把范围控制、工程习惯、有效验证与交付写作放在一起：对真实问题负责，让复杂度有实际用途，并持续推进任务。
+[🌐 网站](https://rikfish163-rgb.github.io/nooverkill/) · [📜 完整提示词](RULES.md) · [🔌 安装与兼容](hosts.md) · [💬 使用反馈](https://github.com/rikfish163-rgb/nooverkill/issues) · [🇬🇧 English](README_EN.md)
+
+NoOverkill 帮助 AI 编码 Agent 减少过度设计、无效校验和反复停顿。它把范围控制、工程习惯与交付约定装进可复制的提示词、Skill 和 Plugin；真实问题照样报告，必要工作照样完成。
 
 👇 直接复制提示词即可开始，也可安装为规则文件、Skill 或 Plugin。欢迎分享**使用本仓库提示词后仍然出现或新出现的问题，以及解决了什么问题、带来了什么好效果**。
 
@@ -64,7 +66,7 @@ Agent Scope 是一份跨平台的 Agent 工作约定。它把范围控制、工�
 | 🧩 Skill | 按任务调用核心原则，按需读取完整工程约定 | 六个平台，含完整技能目录 |
 | 📦 Plugin | 由宿主管理 Skill 的安装、更新和卸载 | Codex、Claude Code 原生插件 |
 
-通常选择一种入口即可。Plugin 和 Skill 的安装不等于在每条消息中自动加载全文。
+通常选择一种入口即可。显示名称为 **NoOverkill**，Skill / Plugin 的安装标识为 `agent-scope`。Plugin 和 Skill 的安装不等于在每条消息中自动加载全文。
 
 ### 📦 Plugin：直接交给宿主管理
 
@@ -73,18 +75,18 @@ Agent Scope 是一份跨平台的 Agent 工作约定。它把范围控制、工�
 **Codex：**
 
 ```bash
-codex plugin marketplace add rikfish163-rgb/agent-scope
+codex plugin marketplace add rikfish163-rgb/nooverkill
 codex plugin add agent-scope@agent-scope
 ```
 
 **Claude Code：**
 
 ```bash
-claude plugin marketplace add rikfish163-rgb/agent-scope
+claude plugin marketplace add rikfish163-rgb/nooverkill
 claude plugin install agent-scope@agent-scope --scope user
 ```
 
-第一条注册本仓库的 marketplace，第二条安装插件。`agent-scope@agent-scope` 分别是插件名和 marketplace 名。安装后新建会话：Codex 在插件 / 技能选择器中选择 **Agent Scope**；Claude Code 在对话框输入 `/agent-scope:agent-scope` 并附上任务。
+第一条注册本仓库的 marketplace，第二条安装插件。`agent-scope@agent-scope` 分别是插件名和 marketplace 名。安装后新建会话：Codex 在插件 / 技能选择器中选择 **NoOverkill**；Claude Code 在对话框输入 `/agent-scope:agent-scope` 并附上任务。
 
 ### 📜 规则文件 / 🧩 独立 Skill
 
@@ -92,7 +94,7 @@ claude plugin install agent-scope@agent-scope --scope user
 
 ```bash
 # macOS / Linux · Bash / Zsh
-git clone https://github.com/rikfish163-rgb/agent-scope.git "$HOME/.local/share/agent-scope"
+git clone https://github.com/rikfish163-rgb/nooverkill.git "$HOME/.local/share/agent-scope"
 ```
 
 将 `/absolute/path/to/project` 换成**实际要工作的项目路径**。选择一种安装方式：
@@ -115,7 +117,7 @@ python3 "$HOME/.local/share/agent-scope/install.py" --agent codex --kind skill -
 下载一次，再将 `C:\path\to\project` 换成目标项目路径：
 
 ```powershell
-git clone https://github.com/rikfish163-rgb/agent-scope.git "$env:LOCALAPPDATA\agent-scope"
+git clone https://github.com/rikfish163-rgb/nooverkill.git "$env:LOCALAPPDATA\agent-scope"
 py -3 "$env:LOCALAPPDATA\agent-scope\install.py" --agent codex --kind rules --project "C:\path\to\project"
 ```
 
@@ -144,15 +146,15 @@ py -3 "$env:LOCALAPPDATA\agent-scope\install.py" --agent codex --kind rules --pr
 
 欢迎报告：仍然过度设计、重复审阅、不必要停顿；或提示词导致过度纠偏、漏掉必要校验、忽略真实问题、与项目要求冲突等。请说明你使用了本仓库的哪版提示词、放在哪里，以及具体发生了什么。
 
-👉 [🐛 提交 Bad case：使用后遇到的问题](https://github.com/rikfish163-rgb/agent-scope/issues/new?template=bad-case.yml)
+👉 [🐛 提交 Bad case：使用后遇到的问题](https://github.com/rikfish163-rgb/nooverkill/issues/new?template=bad-case.yml)
 
 **🌱 解决了哪些问题，有什么好的效果？**
 
 欢迎分享：原来卡在哪，使用提示词后怎样推进，哪些无效工作减少了，哪些必要工作得到保留，以及最终完成了什么。有前后片段或结果就附上；未测量的时间、成本和成功率不必填写推测数字。
 
-👉 [🌱 提交 Positive case：解决的问题与好效果](https://github.com/rikfish163-rgb/agent-scope/issues/new?template=positive-case.yml)
+👉 [🌱 提交 Positive case：解决的问题与好效果](https://github.com/rikfish163-rgb/nooverkill/issues/new?template=positive-case.yml)
 
-提交时带上 Agent / 模型 / 版本、提示词版本与加载方式、任务上下文和必要证据。具体要求见 [贡献指南](CONTRIBUTING.md)。规则示例与用户的实际使用反馈分别标注，实际反馈在 [Issues](https://github.com/rikfish163-rgb/agent-scope/issues) 公开讨论。
+提交时带上 Agent / 模型 / 版本、提示词版本与加载方式、任务上下文和必要证据。具体要求见 [贡献指南](CONTRIBUTING.md)。规则示例与用户的实际使用反馈分别标注，实际反馈在 [Issues](https://github.com/rikfish163-rgb/nooverkill/issues) 公开讨论。
 
 ## 🛠️ 本地开发
 
@@ -171,6 +173,10 @@ python3 -m http.server 8000 --directory docs
 ## ⚠️ 已知限制
 
 提示词是工作约定，不保证每次执行。平台加载范围、长度限制、上下文压缩和更具体的规则会影响效果。规则示例不代表实测效果；单次使用反馈不等于普遍效果或因果证明。安装器与包内容有自动化测试，宿主验证范围见 [兼容文档](hosts.md#已知限制)。
+
+## ⭐ 支持项目
+
+如果这份约定帮你少做了无效工作、完成了实际任务，欢迎 [Star 仓库](https://github.com/rikfish163-rgb/nooverkill) 并分享使用片段。真实的 Bad case 和 Positive case 能帮助大家判断它在什么任务里有用。
 
 ## 📄 许可
 

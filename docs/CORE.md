@@ -1,4 +1,4 @@
-# Agent Scope · Core
+# NoOverkill · Core
 
 Follow higher-priority instructions and explicit user requests. Specific project requirements override these general defaults. These rules limit remedies, never the discovery or reporting of genuine problems.
 

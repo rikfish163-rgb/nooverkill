@@ -6,7 +6,7 @@
 
 [🌐 Website](https://rikfish163-rgb.github.io/agent-scope/) · [📜 Full rules](RULES.md) · [⚡ Core rules](rules/core.md) · [🇨🇳 中文](README.md)
 
-Portable working instructions for coding agents, combining scope control, engineering conventions, purposeful verification, and final-result writing. The bad cases below explain the behaviors these instructions address. Community feedback focuses on problems and positive outcomes observed after using this repository’s prompts.
+Portable working instructions for coding agents, combining scope control, engineering conventions, purposeful verification, and final-result writing. Community feedback focuses on problems and positive outcomes observed after using this repository’s prompts.
 
 Report every genuine issue, including uncommon inputs reachable through supported usage. Bound the remedy, not discovery. Required security, compatibility, migration, and review work stays required. Prefer concrete judgment and continued delivery over speculative scaffolding or repeated audits.
 
@@ -34,48 +34,76 @@ Calibration examples, not a rejection checklist: row hashes where cell compariso
 
 This is the core version. [RULES.md](RULES.md) also contains the engineering topics and their applicability conditions.
 
-## 🔌 Command installation
+## 🔌 Choose an installation
 
-Run from the target project directory. Requires Git and Python 3.9+, with no Python dependencies.
+| Form | Behavior | Hosts |
+| --- | --- | --- |
+| 📜 Rules | Persistent project instructions; full or core text | Six file adapters |
+| 🧩 Skill | Core principles on invocation; full engineering reference on demand | Six skill adapters |
+| 📦 Plugin | Host-managed distribution of the same skill | Codex and Claude Code |
+
+Usually choose one entry point. Installing a plugin makes its skill available; it does not append the full rules to every conversation.
+
+### 📦 Native plugins
+
+Run in your **system terminal**, from any directory. Requires Git and a host version with plugin commands.
+
+**Codex:**
 
 ```bash
-git clone https://github.com/rikfish163-rgb/agent-scope.git "$HOME/.local/share/agent-scope"
-python3 "$HOME/.local/share/agent-scope/install.py" --agent codex --project .
+codex plugin marketplace add rikfish163-rgb/agent-scope
+codex plugin add agent-scope@agent-scope
 ```
 
-Available adapters: `codex`, `claude`, `cursor`, `copilot`, `gemini`, `opencode`. Existing project text is preserved; reinstalling updates the managed block. Add `--profile core` for the nine core principles, or `--remove` to uninstall the block. Use `--dry-run` to preview the destination. Supported hosts also accept `--global`; custom hosts accept `--agent generic --target /path/to/instructions.md`.
+**Claude Code:**
 
-On Windows PowerShell:
+```bash
+claude plugin marketplace add rikfish163-rgb/agent-scope
+claude plugin install agent-scope@agent-scope --scope user
+```
+
+The first command registers this repository as a marketplace; the second installs its plugin. In `agent-scope@agent-scope`, the left name is the plugin and the right name is the marketplace. Start a new session, then select **Agent Scope** in Codex or type `/agent-scope:agent-scope` followed by your task in Claude Code chat.
+
+### 📜 Rule files / 🧩 Standalone skill
+
+Requires Git and Python 3.9+, with no Python dependencies. Download the tool once, from any directory:
+
+```bash
+# macOS / Linux · Bash / Zsh
+git clone https://github.com/rikfish163-rgb/agent-scope.git "$HOME/.local/share/agent-scope"
+```
+
+Replace `/absolute/path/to/project` with your **target project**, not the downloaded tool repository. Choose one:
+
+```bash
+# Append the full prompt to the target project's AGENTS.md, preserving existing instructions
+python3 "$HOME/.local/share/agent-scope/install.py" --agent codex --kind rules --project "/absolute/path/to/project"
+```
+
+```bash
+# Install the complete skill folder at .agents/skills/agent-scope/ in the target project
+python3 "$HOME/.local/share/agent-scope/install.py" --agent codex --kind skill --project "/absolute/path/to/project"
+```
+
+Replace `codex` with `claude`, `cursor`, `copilot`, `gemini`, or `opencode`. Rules accept `--profile core`; skills include the core and full reference together. Start a new session, then invoke a standalone skill with `$agent-scope` in Codex or `/agent-scope` in Claude Code.
+
+<details>
+<summary>🪟 Windows PowerShell</summary>
+
+Download once and replace `C:\path\to\project` with your target project:
 
 ```powershell
 git clone https://github.com/rikfish163-rgb/agent-scope.git "$env:LOCALAPPDATA\agent-scope"
-py -3 "$env:LOCALAPPDATA\agent-scope\install.py" --agent codex --project .
+py -3 "$env:LOCALAPPDATA\agent-scope\install.py" --agent codex --kind rules --project "C:\path\to\project"
 ```
 
-The optional Gemini CLI extension loads `RULES.md` directly:
+Change `--kind rules` to `--kind skill` for a standalone skill.
 
-```bash
-gemini extensions install https://github.com/rikfish163-rgb/agent-scope
-```
+</details>
 
-Choose file installation or the extension, not both. [Platform sources, update/remove commands, and loading details](hosts.md).
+Use `--project .` only when already in the target project. Use `--global` instead for a personal installation. Update the tool checkout with `git pull --ff-only`, then repeat the original installer command. Append `--remove` to that command to uninstall.
 
-## 🚫 Bad cases: behaviors to reduce
-
-These are calibration examples of the behavior the prompt is intended to address.
-
-| Situation | ❌ Disproportionate behavior | ✅ Appropriate action |
-| --- | --- | --- |
-| Comparing tables | Hash every row and maintain an index just to find differences | Compare the cells directly |
-| Delivering a file | Add checksum files no process reads | Use a digest only when it saves a costlier operation and changes the next action |
-| Exploring a local prototype | Build account defenses for an app without users or deployment | Finish the prototype and perform explicitly required security work |
-| Implementing a feature | Audit the same patch all night without delivering the feature | Run purposeful checks, then continue delivery |
-| Reviewing code | Reject every submission regardless of evidence | Report concrete findings; say when the change is correct |
-| Fixing a behavior | Add guards justified only by previous guards | Validate once at the owning boundary |
-| Choosing an implementation | Repeatedly escalate equally reasonable options | Choose, state the tradeoff, and proceed |
-| Writing the deliverable | Include drafting history and disclaimers in every paragraph | Present the final result and collect material limitations |
-
-🟢 Keep necessary work: a digest that avoids rereading a large file, and a genuine failure exposed by the project’s documented input, are valid. Judge the actual requirement, not the appearance of defense.
+[📖 Platform paths, complete update/remove commands, and Gemini extension](hosts.md) · [🧩 Skill package](skills/agent-scope) · [📦 Plugin package](plugins/agent-scope)
 
 ## 💬 Share what happened after using the prompt
 
@@ -87,8 +115,10 @@ Include the agent/model/version, prompt edition and version, loading method, tas
 
 ## 🛠️ Development
 
+Run from this repository root; on Windows, replace `python3` with `py -3`.
 
 ```bash
+python3 scripts/build_packages.py
 python3 -m unittest discover -s tests
 node --check site/app.js
 python3 scripts/build_site.py
@@ -99,6 +129,6 @@ The site is buildless HTML/CSS/JS with a standard-library Python content build. 
 
 ## ⚠️ Limitations
 
-Instructions guide behavior; they do not guarantee compliance. Host limits, excluded sources, compaction, and more specific project rules can affect loading or behavior. Tests cover installer file operations and site content; compatibility documentation is not a claim of end-to-end testing on every client or measured model improvement.
+Instructions guide behavior; they do not guarantee compliance. Host limits, excluded sources, compaction, and more specific project rules can affect loading or behavior. Tests cover installer file operations, package contents, and site content; compatibility documentation is not a claim of end-to-end testing on every client or measured model improvement.
 
 MIT. See [LICENSE](LICENSE) and [attribution](THIRD_PARTY_NOTICES.md).

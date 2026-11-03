@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "agent-scope",
+  "version": "0.2.0",
+  "description": "Proportionate remedies, purposeful verification, and complete delivery.",
+  "author": {"name": "rikfish163-rgb"},
+  "homepage": "https://rikfish163-rgb.github.io/agent-scope/",
+  "repository": "https://github.com/rikfish163-rgb/agent-scope",
+  "license": "MIT",
+  "keywords": ["agent-skills", "scope", "engineering"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Agent Scope",
+        "shortDescription": "Keep remedies proportionate and finish the task",
+        "longDescription": "Apply shared scope and engineering principles to report real problems, avoid speculative scaffolding, run purposeful checks, and deliver the authorized work.",
+        "defaultPrompt": ["Use Agent Scope to continue this task with proportionate remedies and complete delivery."]
+      }
+    }
+  }
+}

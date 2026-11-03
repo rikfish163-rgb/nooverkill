@@ -8,7 +8,7 @@
 
 Agent Scope 是一份跨平台的 Agent 工作约定。它把范围控制、工程习惯、有效验证与交付写作放在一起：对真实问题负责，让复杂度有实际用途，并持续推进任务。
 
-👇 直接复制提示词即可开始。README 中的 bad cases 说明这份约定想减少哪些行为；欢迎分享**使用本仓库提示词后仍然出现或新出现的问题，以及解决了什么问题、带来了什么好效果**。
+👇 直接复制提示词即可开始，也可安装为规则文件、Skill 或 Plugin。欢迎分享**使用本仓库提示词后仍然出现或新出现的问题，以及解决了什么问题、带来了什么好效果**。
 
 ## 🚀 快速上手：复制这段提示词
 
@@ -56,64 +56,87 @@ Agent Scope 是一份跨平台的 Agent 工作约定。它把范围控制、工�
 
 这段是中文快速上手版。完整工作约定还包含代码组织、UI、接口兼容和持久化执行等工程专题，见 [RULES.md](RULES.md)；英文核心版见 [rules/core.md](rules/core.md)。
 
-## 🔌 命令安装
+## 🔌 选择安装方式
 
-在目标项目目录运行（Git + Python 3.9+，无需额外依赖）：
+| 方式 | 用途 | 支持 |
+| --- | --- | --- |
+| 📜 规则文件 | 作为项目持续加载的工作约定 | 六个平台，完整 / 核心版 |
+| 🧩 Skill | 按任务调用核心原则，按需读取完整工程约定 | 六个平台，含完整技能目录 |
+| 📦 Plugin | 由宿主管理 Skill 的安装、更新和卸载 | Codex、Claude Code 原生插件 |
+
+通常选择一种入口即可。Plugin 和 Skill 的安装不等于在每条消息中自动加载全文。
+
+### 📦 Plugin：直接交给宿主管理
+
+在**系统终端**运行，可位于任意目录；需要对应宿主的插件命令和 Git。
+
+**Codex：**
 
 ```bash
-git clone https://github.com/rikfish163-rgb/agent-scope.git "$HOME/.local/share/agent-scope"
-python3 "$HOME/.local/share/agent-scope/install.py" --agent codex --project .
+codex plugin marketplace add rikfish163-rgb/agent-scope
+codex plugin add agent-scope@agent-scope
 ```
 
-将 `codex` 换成 `claude`、`cursor`、`copilot`、`gemini` 或 `opencode`。安装器保留已有项目内容，重复运行更新同一个区块。`--profile core` 安装核心九条短版，`--remove` 只卸载本工具区块。
+**Claude Code：**
 
-🪟 Windows PowerShell：
+```bash
+claude plugin marketplace add rikfish163-rgb/agent-scope
+claude plugin install agent-scope@agent-scope --scope user
+```
+
+第一条注册本仓库的 marketplace，第二条安装插件。`agent-scope@agent-scope` 分别是插件名和 marketplace 名。安装后新建会话：Codex 在插件 / 技能选择器中选择 **Agent Scope**；Claude Code 在对话框输入 `/agent-scope:agent-scope` 并附上任务。
+
+### 📜 规则文件 / 🧩 独立 Skill
+
+需要 Git + Python 3.9+。在任意目录下载工具一次，工具仓库与目标项目是两个目录：
+
+```bash
+# macOS / Linux · Bash / Zsh
+git clone https://github.com/rikfish163-rgb/agent-scope.git "$HOME/.local/share/agent-scope"
+```
+
+将 `/absolute/path/to/project` 换成**实际要工作的项目路径**。选择一种安装方式：
+
+```bash
+# 规则文件：向目标项目的 AGENTS.md 添加完整提示词，保留已有约定
+python3 "$HOME/.local/share/agent-scope/install.py" --agent codex --kind rules --project "/absolute/path/to/project"
+```
+
+```bash
+# Skill：安装完整目录到目标项目的 .agents/skills/agent-scope/
+python3 "$HOME/.local/share/agent-scope/install.py" --agent codex --kind skill --project "/absolute/path/to/project"
+```
+
+将 `codex` 换成 `claude`、`cursor`、`copilot`、`gemini` 或 `opencode`。规则模式可加 `--profile core` 安装九条短版；Skill 内含核心原则及完整工程参考，不使用这个参数。独立 Skill 安装后新建会话，Codex 用 `$agent-scope`，Claude Code 用 `/agent-scope` 调用。
+
+<details>
+<summary>🪟 Windows PowerShell 命令</summary>
+
+下载一次，再将 `C:\path\to\project` 换成目标项目路径：
 
 ```powershell
 git clone https://github.com/rikfish163-rgb/agent-scope.git "$env:LOCALAPPDATA\agent-scope"
-py -3 "$env:LOCALAPPDATA\agent-scope\install.py" --agent codex --project .
+py -3 "$env:LOCALAPPDATA\agent-scope\install.py" --agent codex --kind rules --project "C:\path\to\project"
 ```
 
-[全局安装、自定义入口、Gemini 原生扩展与更新方式 →](hosts.md)
+上例安装规则文件。要安装独立 Skill，将 `--kind rules` 改为 `--kind skill`。
 
-## 🧠 规则里有什么
+</details>
 
-- **发现与修法分开。** 文档、公开接口和真实数据可达的问题，即使少见也要报告；不要求先做出复现。
-- **复杂度需要理由。** 摘要须替代明显更贵的操作并改变下一步；不为不存在的场景搭建包装、迁移和兼容结构。
-- **判断推动行动。** 不用评分表替代判断，不为已经定论的东西重复审阅；合理方案自主选择，非阻塞细节记录后继续。
-- **必要工作仍须完成。** 用户、项目和更高优先级要求的安全、迁移、校验和审阅继续执行。
-- **交付只呈现最终结果。** 强结果优先、数字如实保留、限制集中说明；不写生成过程和纠偏痕迹。
+📍 已进入目标项目时可用 `--project .`；个人跨项目安装用 `--global` 替代项目参数。更新时先 `git pull --ff-only` 工具仓库，再重跑原安装命令；卸载在原命令末尾加 `--remove`。
+
+[📖 每个平台的实际路径、完整更新 / 卸载命令及 Gemini 扩展 →](hosts.md)
+
+## 🗂️ 仓库内容
 
 | 文件 | 用途 |
 | --- | --- |
-| [RULES.md](RULES.md) | 完整版，保留通用工程专题与适用条件 |
-| [rules/core.md](rules/core.md) | 九条核心原则与正反校准例子 |
-| [install.py](install.py) / [platforms.json](platforms.json) | 六种原生文件入口与自定义 Markdown 入口 |
-| [cases/catalog.json](cases/catalog.json) | 网站规则示例与收录反馈的数据源 |
-| [.github/ISSUE_TEMPLATE](.github/ISSUE_TEMPLATE) | 提示词使用问题 / 正向效果提交表单 |
-| [site](site) / [docs](docs) | 静态页面源码 / GitHub Pages 产物 |
-
-## 🚫 Bad cases：我们想减少什么
-
-这些是提示词针对的典型行为示例，用来识别问题。
-
-| 场景 | ❌ 不合适的行为 | ✅ 合适的处理 |
-| --- | --- | --- |
-| 比较两张表 | 每行都算哈希、维护摘要索引，才去判断差异 | 直接比较单元格，输出差异 |
-| 交付一个文件 | 附带一批没有任何流程读取的校验和 | 交付所需文件；摘要须省去更贵操作并改变下一步 |
-| 探索本地原型 | 应用没有用户、没有部署，却先做账号安全堡垒 | 完成原型目标，并执行项目明确要求的安全工作 |
-| 实现一个功能 | 对同一补丁审一整夜，功能仍没落地 | 完成能捕获具体失败的检查，然后继续交付 |
-| 审阅代码 | 无论代码和证据如何，对所有提交都判不通过 | 有问题就指出；正确时明确说正确 |
-| 修复已有行为 | 守卫套守卫，理由只是上一层也可能失效 | 在拥有边界的地方验证一次，向内传递已保证的值 |
-| 选择实现方案 | 几个方案都合理，仍反复让用户选择或批准 | 自主选一个，说明取舍，继续推进 |
-| 撰写交付物 | 每段附免责声明，把指令、改稿和中间错误写进成品 | 呈现最终结果，必要限制集中说明 |
-
-**🟢 两种看起来相似、却应当保留的工作：**
-
-- 摘要比较确实省掉大文件重读，并决定是否重读。
-- 项目文档示例会产生的少见输入暴露了真实错误。
-
-判断依据是这里实际需要什么，不是“它听起来像防御”。
+| [RULES.md](RULES.md) / [rules/core.md](rules/core.md) | 完整约定 / 核心九条与校准例子 |
+| [skills/agent-scope](skills/agent-scope) | 可独立安装的标准 Skill |
+| [plugins/agent-scope](plugins/agent-scope) | Codex / Claude Code 共用的完整插件包 |
+| [install.py](install.py) / [platforms.json](platforms.json) | 六个平台的规则与 Skill 安装器 |
+| [cases/catalog.json](cases/catalog.json) | 网站示例与收录反馈的数据源 |
+| [site](site) / [docs](docs) | 网站源码 / GitHub Pages 产物 |
 
 ## 💬 欢迎反馈使用后的问题与效果
 
@@ -121,30 +144,33 @@ py -3 "$env:LOCALAPPDATA\agent-scope\install.py" --agent codex --project .
 
 欢迎报告：仍然过度设计、重复审阅、不必要停顿；或提示词导致过度纠偏、漏掉必要校验、忽略真实问题、与项目要求冲突等。请说明你使用了本仓库的哪版提示词、放在哪里，以及具体发生了什么。
 
-👉 [反馈使用问题 / Bad case](https://github.com/rikfish163-rgb/agent-scope/issues/new?template=bad-case.yml)
+👉 [🐛 提交 Bad case：使用后遇到的问题](https://github.com/rikfish163-rgb/agent-scope/issues/new?template=bad-case.yml)
 
 **🌱 解决了哪些问题，有什么好的效果？**
 
 欢迎分享：原来卡在哪，使用提示词后怎样推进，哪些无效工作减少了，哪些必要工作得到保留，以及最终完成了什么。有前后片段或结果就附上；未测量的时间、成本和成功率不必填写推测数字。
 
-👉 [分享解决的问题与正向效果 / Positive case](https://github.com/rikfish163-rgb/agent-scope/issues/new?template=positive-case.yml)
+👉 [🌱 提交 Positive case：解决的问题与好效果](https://github.com/rikfish163-rgb/agent-scope/issues/new?template=positive-case.yml)
 
 提交时带上 Agent / 模型 / 版本、提示词版本与加载方式、任务上下文和必要证据。具体要求见 [贡献指南](CONTRIBUTING.md)。规则示例与用户的实际使用反馈分别标注，实际反馈在 [Issues](https://github.com/rikfish163-rgb/agent-scope/issues) 公开讨论。
 
 ## 🛠️ 本地开发
 
+从本仓库根目录运行；Windows 将 `python3` 换为 `py -3`：
+
 ```bash
+python3 scripts/build_packages.py
 python3 -m unittest discover -s tests
 node --check site/app.js
 python3 scripts/build_site.py
 python3 -m http.server 8000 --directory docs
 ```
 
-浏览 `http://localhost:8000`。页面无需前端构建依赖；正文、案例和平台信息由 Python 标准库构建脚本写入静态页面。GitHub Pages 从 `main` 分支的 `docs/` 发布。
+浏览 [本地预览](http://localhost:8000)。页面无需前端构建依赖；正文、案例和平台信息由 Python 标准库构建脚本写入静态页面。GitHub Pages 从 `main` 分支的 `docs/` 发布。
 
 ## ⚠️ 已知限制
 
-提示词是工作约定，不保证每次执行。平台加载范围、长度限制、上下文压缩和更具体的规则会影响效果。规则示例不代表实测效果；单次使用反馈不等于普遍效果或因果证明。文件适配有自动化测试，完整说明见 [兼容文档](hosts.md#已知限制)。
+提示词是工作约定，不保证每次执行。平台加载范围、长度限制、上下文压缩和更具体的规则会影响效果。规则示例不代表实测效果；单次使用反馈不等于普遍效果或因果证明。安装器与包内容有自动化测试，宿主验证范围见 [兼容文档](hosts.md#已知限制)。
 
 ## 📄 许可
 

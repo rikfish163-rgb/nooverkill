@@ -1,0 +1,10 @@
+{
+  "name": "agent-scope",
+  "version": "0.2.0",
+  "description": "Proportionate remedies, purposeful verification, and complete delivery.",
+  "author": {"name": "rikfish163-rgb"},
+  "homepage": "https://rikfish163-rgb.github.io/agent-scope/",
+  "repository": "https://github.com/rikfish163-rgb/agent-scope",
+  "license": "MIT",
+  "keywords": ["agent-skills", "scope", "engineering"]
+}

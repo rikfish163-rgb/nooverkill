@@ -27,21 +27,46 @@ async function copy(text) {
 
 function renderInstall() {
   const host = data.platforms[platform];
+  const kindSelect = byId('install-kind');
+  const supportsPlugin = platform === 'codex' || platform === 'claude';
+  kindSelect.options[2].disabled = !supportsPlugin;
+  if (kindSelect.value === 'plugin' && !supportsPlugin) kindSelect.value = 'skill';
+  const kind = kindSelect.value;
+  const isSkill = kind === 'skill';
+  const isPlugin = kind === 'plugin';
   const scope = byId('install-scope');
-  scope.options[1].disabled = !host.global;
-  if (!host.global) scope.value = 'project';
+  const globalPath = isSkill ? host.skill_global : host.global;
+  scope.disabled = isPlugin;
+  scope.options[1].disabled = !isPlugin && !globalPath;
+  if (isPlugin) scope.value = 'global';
+  else if (!globalPath) scope.value = 'project';
   const isGlobal = scope.value === 'global';
+  byId('install-profile').disabled = kind !== 'rules';
   const profile = byId('install-profile').value;
   const windows = byId('install-os').value === 'windows';
-  const location = isGlobal ? `~/${host.global}` : host.project;
+  const location = isPlugin ? 'agent-scope@agent-scope' : isGlobal ? `~/${globalPath}` : isSkill ? host.skill_project : host.project;
   byId('install-target').textContent = location;
-  byId('platform-source').href = host.source;
-  byId('platform-note').textContent = host.note;
-  byId('terminal-label').textContent = isGlobal ? 'TERMINAL · 个人全局规则' : 'TERMINAL · 在目标项目目录运行';
-  const args = `--agent ${platform} ${isGlobal ? '--global' : '--project .'}${profile === 'core' ? ' --profile core' : ''}`;
-  byId('install-command').textContent = windows
-    ? `git clone ${repository} "$env:LOCALAPPDATA\\agent-scope"\npy -3 "$env:LOCALAPPDATA\\agent-scope\\install.py" ${args}`
-    : `git clone ${repository} "$HOME/.local/share/agent-scope"\npython3 "$HOME/.local/share/agent-scope/install.py" ${args}`;
+  if (isPlugin) {
+    byId('platform-source').href = platform === 'codex' ? 'https://developers.openai.com/plugins/build/plugins' : 'https://code.claude.com/docs/en/plugin-marketplaces';
+    byId('install-command').textContent = platform === 'codex'
+      ? 'codex plugin marketplace add rikfish163-rgb/agent-scope\ncodex plugin add agent-scope@agent-scope'
+      : 'claude plugin marketplace add rikfish163-rgb/agent-scope\nclaude plugin install agent-scope@agent-scope --scope user';
+    byId('terminal-label').textContent = 'TERMINAL · 任意目录 · 个人插件';
+    byId('platform-note').textContent = `第一条注册本仓库 marketplace，第二条安装插件。新建会话后，${platform === 'codex' ? '在插件或技能选择器中选择 Agent Scope。' : '在对话框输入 /agent-scope:agent-scope 并附上任务。'}`;
+    byId('install-requirements').textContent = '需要 Git 与支持插件命令的宿主。Plugin 内含 Agent Scope Skill。';
+  } else {
+    const project = windows ? '"C:\\path\\to\\project"' : '"/absolute/path/to/project"';
+    const args = `--agent ${platform} --kind ${kind} ${isGlobal ? '--global' : `--project ${project}`}${kind === 'rules' && profile === 'core' ? ' --profile core' : ''}`;
+    const instruction = isGlobal ? '# 个人安装，跨项目可用' : '# 将目标项目路径替换为你实际工作的目录';
+    byId('install-command').textContent = windows
+      ? `# 下载工具一次；已下载请更新仓库\ngit clone ${repository} "$env:LOCALAPPDATA\\agent-scope"\n${instruction}\npy -3 "$env:LOCALAPPDATA\\agent-scope\\install.py" ${args}`
+      : `# 下载工具一次；已下载请更新仓库\ngit clone ${repository} "$HOME/.local/share/agent-scope"\n${instruction}\npython3 "$HOME/.local/share/agent-scope/install.py" ${args}`;
+    byId('terminal-label').textContent = 'TERMINAL · 任意目录';
+    byId('platform-source').href = isSkill ? host.skill_source : host.source;
+    const invocation = platform === 'codex' ? '输入 $agent-scope 并附上任务。' : platform === 'claude' ? '输入 /agent-scope 并附上任务。' : '在技能选择器中选择 Agent Scope，或明确让 Agent 使用 agent-scope 技能。';
+    byId('platform-note').textContent = isSkill ? `安装完整技能目录，含核心原则及按需读取的工程参考。新建会话后${invocation}` : host.note;
+    byId('install-requirements').textContent = '需要 Git 与 Python 3.9+。工具下载目录与目标项目是两个目录。';
+  }
   document.querySelectorAll('[data-platform]').forEach((button) => {
     const selected = button.dataset.platform === platform;
     button.setAttribute('aria-selected', String(selected));
@@ -74,7 +99,7 @@ Object.entries(data.platforms).forEach(([id, host]) => {
   byId('platform-tabs').append(button);
 });
 document.querySelector('.install-body').id = 'install-content';
-['install-scope', 'install-profile', 'install-os'].forEach((id) => byId(id).addEventListener('change', renderInstall));
+['install-kind', 'install-scope', 'install-profile', 'install-os'].forEach((id) => byId(id).addEventListener('change', renderInstall));
 byId('copy-install').addEventListener('click', () => copy(byId('install-command').textContent));
 
 function renderRules() {

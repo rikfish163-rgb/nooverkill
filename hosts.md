@@ -80,7 +80,7 @@ python3 /path/to/agent-scope/install.py --agent codex --project . --remove
 gemini extensions install https://github.com/rikfish163-rgb/agent-scope
 ```
 
-原生扩展与文件安装选一种，避免重复加载同一正文。扩展管理遵循 [Gemini 官方说明](https://geminicli.com/docs/extensions/managing-extensions/)。
+原生扩展与文件安装选一种，避免重复加载同一正文。扩展管理遵循 [Gemini 官方说明](https://geminicli.com/docs/extensions/)。
 
 ## 加载检查
 
